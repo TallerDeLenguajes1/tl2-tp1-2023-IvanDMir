@@ -13,3 +13,18 @@ C:\Users\User\Desktop\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\refint\tl2
 C:\Users\User\Desktop\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.pdb
 C:\Users\User\Desktop\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.genruntimeconfig.cache
 C:\Users\User\Desktop\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\ref\tl2-tp1-2023-IvanDMir.dll
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\bin\Debug\net7.0\tl2-tp1-2023-IvanDMir.exe
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\bin\Debug\net7.0\tl2-tp1-2023-IvanDMir.deps.json
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\bin\Debug\net7.0\tl2-tp1-2023-IvanDMir.runtimeconfig.json
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\bin\Debug\net7.0\tl2-tp1-2023-IvanDMir.dll
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\bin\Debug\net7.0\tl2-tp1-2023-IvanDMir.pdb
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.csproj.AssemblyReference.cache
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.AssemblyInfoInputs.cache
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.AssemblyInfo.cs
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.csproj.CoreCompileInputs.cache
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.dll
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\refint\tl2-tp1-2023-IvanDMir.dll
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.pdb
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\tl2-tp1-2023-IvanDMir.genruntimeconfig.cache
+C:\Users\ivanm\Dropbox\Facultad\Tercer año Segundo cuatrimestre\Taller 2\tl2-tp1-2023-IvanDMir\obj\Debug\net7.0\ref\tl2-tp1-2023-IvanDMir.dll

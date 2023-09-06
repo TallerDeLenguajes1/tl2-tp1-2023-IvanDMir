@@ -1,8 +1,7 @@
-﻿﻿using System;
-using System.IO;
-using System.Collections;
+﻿﻿
+using System.Reflection.Metadata;
 using Programa;
-using System.Linq;
+
 
 internal class Program
 {
@@ -20,43 +19,40 @@ internal class Program
         {
         var ingresar="";
         var nroDePedido=0;
-        Pedido pedidotomado=new Pedido();
-        var cadeteAsignado = new Cadete();
         cadeteriaSeleccionada.Mostrar();
         
-        while(ingresar!="e")
+        while(ingresar!="f")
         {
             Console.WriteLine("Seleccione una opcion:");
             Console.WriteLine("a) Dar de alta el pedido");
             Console.WriteLine("b) Asignarlo a un cadete");
             Console.WriteLine("c) Cambiarlo de estado");
             Console.WriteLine("d) Reasignar el pedido a otro cadete");
-            Console.WriteLine("e) Salir");
+            Console.WriteLine("e) Ver cuanto debe cobrar un cadete por id");
+            Console.WriteLine("f) Salir");
             ingresar=Console.ReadLine();
             switch (ingresar)
             {
                     case "a":
-                        pedidotomado=DarDeAlta(nroDePedido);
+                        cadeteriaSeleccionada.CrearPedido(nroDePedido);
                         nroDePedido+=1;
-                        pedidotomado.Mostrar();
                         break;
                     case "b":
-                    if(pedidotomado!=null)
-                    {
-                        cadeteAsignado=AsignarCadete(listaCadetes, pedidotomado);
-                    }
+                        AsignarPedidoACadete(cadeteriaSeleccionada);
+            
                         break;
                     case "c":
-                        CambiarDeEstado(pedidotomado, cadeteAsignado);
+                        CambiarDeEstado(cadeteriaSeleccionada);
                         break;
                     case "d":
-                        cadeteAsignado.RechazarPedido(pedidotomado);
-                        var CambiarCadete=AsignarCadete(listaCadetes,pedidotomado);
+                        ReasignarPedido(cadeteriaSeleccionada);
                         break;
-                        
+                    case "e":
+                        JornalACobraPorID(cadeteriaSeleccionada);
+                        break;
+               
                 }
         }
-        cadeteriaSeleccionada.MostrarInforme();
         }
         else
         {
@@ -65,45 +61,102 @@ internal class Program
 
 
     }
-
-    private static void CambiarDeEstado(Pedido pedidotomado, Cadete cadeteAsignado)
+     private static void JornalACobraPorID(Cadeteria cadeteriaSeleccionada)
     {
-        Console.WriteLine("Seleccione el estado en que desea colocar el pedido");
-        Console.WriteLine("1. Rechazado");
-        Console.WriteLine("2. Pendiente");
-        var ingresarEstado = Console.ReadLine();
-        if (ingresarEstado == "1")
+        Console.WriteLine("Ingrese el id del cadete que desea ver cuanto cobra");
+        var a = Console.ReadLine();
+        int id;
+        bool anda1 = int.TryParse(a, out id);
+        if (anda1)
         {
-            pedidotomado.RechazarPedido();
-            cadeteAsignado.RechazarPedido(pedidotomado);
-        }
-        else
-        {
-            pedidotomado.Estado = Estados.pendiente;
-            cadeteAsignado.RechazarPedido(pedidotomado);
+            var totalACobrar = cadeteriaSeleccionada.jornalACobrar(id);
+            Console.WriteLine($"El cadete debe cobrar {totalACobrar}");
         }
     }
 
-    private static Cadete AsignarCadete(List<Cadete> listaCadetes, Pedido pedidotomado)
+     private static void ReasignarPedido(Cadeteria cadeteriaSeleccionada)
     {
-        Console.WriteLine("Elige el cadete que desea asignar");
-        int cont = 0;
-        int opcion = 0;
-        foreach (var item in listaCadetes)
+        Console.WriteLine("Ingrese el nro del pedido que desea reasignar");
+        cadeteriaSeleccionada.MostrarPedidosPendientes();
+        var a = Console.ReadLine();
+        int numero;
+        bool Funca = int.TryParse(a, out numero);
+        if (Funca)
         {
-            Console.WriteLine( cont + $" {item.Nombre}");
-            cont+=1;
+            Console.WriteLine("Ingrese el id del cadete al que desea ingresar el pedido");
+            var b = Console.ReadLine();
+            int id;
+            bool anda2 = int.TryParse(b, out id);
+            if (anda2)
+            {
+                cadeteriaSeleccionada.AsignarCadetePorID(id, numero);
+            }
+            else
+            {
+                Console.WriteLine("No se encuentra el cadete");
+            }
         }
-        var cadeteAsignar = Console.ReadLine();
-        if (int.TryParse(cadeteAsignar,out opcion)){
-        var cadeteselecionado = listaCadetes[opcion];
-        cadeteselecionado.AsignarPedido(pedidotomado);
-        pedidotomado.AceptarPedido();
-        cadeteselecionado.Mostrar();
-        return(cadeteselecionado);
-        }else{
-            Console.WriteLine("No existe dicho Cadete");
-            return null;
+    }
+
+    private static void CambiarDeEstado(Cadeteria CadeteriaSeleccionada)
+    {   
+        Console.WriteLine("Seleccione El pedido a cambiar");
+        CadeteriaSeleccionada.MostrarPedidosPendientes();
+        var Seleccion = Console.ReadLine();
+        int numero;
+        bool funciona = int.TryParse(Seleccion,out numero);
+        if (funciona){
+            var PedidoElegido = CadeteriaSeleccionada.ListadoPedidos.FirstOrDefault(l => l.Numero == numero);
+            if (PedidoElegido != null && PedidoElegido.Estado == Estados.pendiente){
+                Console.WriteLine("Seleccione el estado en que desea colocar el pedido");
+                Console.WriteLine("1. Rechazado");
+                Console.WriteLine("2. Aceptado");
+                var SeleccionEstado = Console.ReadLine();
+                if (SeleccionEstado == "1"){
+                    CadeteriaSeleccionada.ListadoPedidos.Remove(PedidoElegido);
+                    PedidoElegido.RechazarPedido();
+                    PedidoElegido = null;
+                    
+                }else if (SeleccionEstado == "2"){
+                    CadeteriaSeleccionada.aceptarPedido(PedidoElegido.Numero);
+                    
+                }
+
+            }
+        }else {
+            Console.WriteLine("Pedido ya Entregado o no creado");
+        }
+        
+        
+    }
+
+    private static void AsignarCadete(Cadeteria cadeteriaSeleccionada, int numero)
+    {
+        var PedidoElegido = cadeteriaSeleccionada.ListadoPedidos.FirstOrDefault(l => l.Numero == numero);
+        if (PedidoElegido != null){
+            Console.WriteLine("Ingrese el id del cadete ");
+            string? opcion = Console.ReadLine();
+            int IdElegida;
+            bool Funca = int.TryParse(opcion,out IdElegida);
+            if(Funca){
+                cadeteriaSeleccionada.AsignarCadetePorID(IdElegida,numero);
+                
+            }
+
+
+        }
+        
+    }
+     private static void AsignarPedidoACadete(Cadeteria cadeteriaSeleccionada)
+    {
+        cadeteriaSeleccionada.MostrarPedidosPendientes();
+        Console.WriteLine("Seleccione el numero de pedido que desea utilizar");
+        var a = Console.ReadLine();
+        int numero;
+        bool Funca = int.TryParse(a, out numero);
+        if (Funca)
+        {
+            AsignarCadete(cadeteriaSeleccionada, numero);
         }
     }
 
@@ -149,20 +202,5 @@ internal class Program
         return nuevaLista;
     }
 
-    public static Pedido DarDeAlta(int nroDePedido)
-        {
-            Console.WriteLine("Ingrese el nombre del cliente");
-            var nombreCliente = Console.ReadLine();
-            Console.WriteLine("Ingrese la direccion donde vive");
-            var direccionCliente = Console.ReadLine();
-            Console.WriteLine("Ingrese el telefono del cliente");
-            var telefonoCliente = Console.ReadLine();
-            Console.WriteLine("Ingrese los datos de Referencia");
-            var datosReferencia = Console.ReadLine();
-            var datosCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferencia);
-            Console.WriteLine("Ingrese las observaciones que tenga del pedido");
-            var observaciones = Console.ReadLine();
-            var PedidoTomado = new Pedido(nroDePedido, observaciones, datosCliente);
-            return(PedidoTomado);
-        }
+  
 }
