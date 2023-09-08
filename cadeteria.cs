@@ -30,35 +30,44 @@ namespace Programa
             this.listadoPedidos=new List<Pedido>(); 
         }
 
-        public void Mostrar()
-        {
-            int cont = 1;
-            Console.WriteLine($"Nombre: {this.nombre}");
-            Console.WriteLine($"Telefono: {this.telefono}");
-            foreach (var cadete in listadoCadetes)
-            {
-                Console.WriteLine($".-.-.-.-.-CLIENTE {cont}-.--..--.-.");
-                cadete.Mostrar();
-                cont += 1;
-            }
-        }
+        // public void Mostrar()
+        // {
+        //     int cont = 1;
+        //     Console.WriteLine($"Nombre: {this.nombre}");
+        //     Console.WriteLine($"Telefono: {this.telefono}");
+        //     foreach (var cadete in listadoCadetes)
+        //     {
+        //         Console.WriteLine($".-.-.-.-.-CLIENTE {cont}-.--..--.-.");
+        //         cadete.Mostrar();
+        //         cont += 1;
+        //     }
+        // }
         
-        public void CrearPedido(int nroDePedido)
-        {
-        Console.WriteLine("Ingrese el nombre del cliente");
-        var nombreCliente = Console.ReadLine();
-        Console.WriteLine("Ingrese la direccion donde vive");
-        var direccionCliente = Console.ReadLine();
-        Console.WriteLine("Ingrese el telefono del cliente");
-        var telefonoCliente = Console.ReadLine();
-        Console.WriteLine("Ingrese los datos de Referencia");
-        var datosReferencia = Console.ReadLine();
-        var datosCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferencia);
-        Console.WriteLine("Ingrese l nombre que tenga del pedido");
-        var observaciones = Console.ReadLine();
-        var PedidoTomado = new Pedido(nroDePedido, observaciones, datosCliente);
-        this.listadoPedidos.Add(PedidoTomado);
+        public string MostrarNombreCadeteria(){
+            return this.nombre;
         }
+         public string MostrarTelefonoCadeteria(){
+            return this.telefono;
+        }
+        public List<Cadete> MostrarCadetesCadeteria(){
+            return listadoCadetes;
+        }
+        // public void CrearPedido(int nroDePedido)
+        // {
+        // Console.WriteLine("Ingrese el nombre del cliente");
+        // var nombreCliente = Console.ReadLine();
+        // Console.WriteLine("Ingrese la direccion donde vive");
+        // var direccionCliente = Console.ReadLine();
+        // Console.WriteLine("Ingrese el telefono del cliente");
+        // var telefonoCliente = Console.ReadLine();
+        // Console.WriteLine("Ingrese los datos de Referencia");
+        // var datosReferencia = Console.ReadLine();
+        // var datosCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferencia);
+        // Console.WriteLine("Ingrese l nombre que tenga del pedido");
+        // var observaciones = Console.ReadLine();
+        // var PedidoTomado = new Pedido(nroDePedido, observaciones, datosCliente);
+        // this.listadoPedidos.Add(PedidoTomado);
+        // }
 
         public void tomarPedido(Pedido PedidoTomado){
             this.listadoPedidos.Add(PedidoTomado);
@@ -75,7 +84,7 @@ namespace Programa
                 }
              
             }else {
-                Console.WriteLine("Cadete no encontrado");
+                return 0;
             }
             double Jornal = 500* PedidosEntregados;
             return Jornal;
@@ -86,7 +95,7 @@ namespace Programa
          if (cadete != null && pedido !=null){
             pedido.asignarCadete(cadete);
          }else{
-              Console.WriteLine("No se encuentra el cliente");
+              return ;
          }
            
             }
@@ -97,13 +106,15 @@ namespace Programa
             }
        }
   
-        public void MostrarPedidosPendientes(){
+        public List<Pedido> PedidosPendientes(){
+            List<Pedido> pedidosPendientes = new List<Pedido>();
             foreach ( var pedido in this.listadoPedidos)
             {
                 if (pedido.Estado == Estados.pendiente){
-                    pedido.Mostrar();
+                    pedidosPendientes.Add(pedido);
                 }
             }
+            return pedidosPendientes;
         }
     }   
 }

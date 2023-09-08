@@ -14,12 +14,15 @@ internal class Program
 
         Console.WriteLine("Ingrese el nombre de la cadeteria con la que desea trabajar");
         var nombreCadeteria = Console.ReadLine();
-        Cadeteria? cadeteriaSeleccionada = listaCadeterias.FirstOrDefault(l=>l.Nombre==nombreCadeteria);
+        Cadeteria cadeteriaSeleccionada = listaCadeterias.FirstOrDefault(l=>l.Nombre==nombreCadeteria);
         if(cadeteriaSeleccionada!=null)
         {
         var ingresar="";
         var nroDePedido=0;
-        cadeteriaSeleccionada.Mostrar();
+       // cadeteriaSeleccionada.Mostrar();
+        cadeteriaSeleccionada.MostrarNombreCadeteria();
+        cadeteriaSeleccionada.MostrarTelefonoCadeteria();
+        cadeteriaSeleccionada.MostrarCadetesCadeteria();
         
         while(ingresar!="f")
         {
@@ -34,7 +37,7 @@ internal class Program
             switch (ingresar)
             {
                     case "a":
-                        cadeteriaSeleccionada.CrearPedido(nroDePedido);
+                        CrearPedido(nroDePedido,cadeteriaSeleccionada);
                         nroDePedido+=1;
                         break;
                     case "b":
@@ -77,7 +80,10 @@ internal class Program
      private static void ReasignarPedido(Cadeteria cadeteriaSeleccionada)
     {
         Console.WriteLine("Ingrese el nro del pedido que desea reasignar");
-        cadeteriaSeleccionada.MostrarPedidosPendientes();
+        List<Pedido> pedidosPendientes=cadeteriaSeleccionada.PedidosPendientes();
+        foreach(Pedido Pendiente in pedidosPendientes){
+            Pendiente.Mostrar();
+        }
         var a = Console.ReadLine();
         int numero;
         bool Funca = int.TryParse(a, out numero);
@@ -101,7 +107,10 @@ internal class Program
     private static void CambiarDeEstado(Cadeteria CadeteriaSeleccionada)
     {   
         Console.WriteLine("Seleccione El pedido a cambiar");
-        CadeteriaSeleccionada.MostrarPedidosPendientes();
+        List<Pedido> pedidosPendientes=CadeteriaSeleccionada.PedidosPendientes();
+        foreach(Pedido Pendiente in pedidosPendientes){
+            Pendiente.Mostrar();
+        }
         var Seleccion = Console.ReadLine();
         int numero;
         bool funciona = int.TryParse(Seleccion,out numero);
@@ -135,7 +144,7 @@ internal class Program
         var PedidoElegido = cadeteriaSeleccionada.ListadoPedidos.FirstOrDefault(l => l.Numero == numero);
         if (PedidoElegido != null){
             Console.WriteLine("Ingrese el id del cadete ");
-            string? opcion = Console.ReadLine();
+            string opcion = Console.ReadLine();
             int IdElegida;
             bool Funca = int.TryParse(opcion,out IdElegida);
             if(Funca){
@@ -149,7 +158,10 @@ internal class Program
     }
      private static void AsignarPedidoACadete(Cadeteria cadeteriaSeleccionada)
     {
-        cadeteriaSeleccionada.MostrarPedidosPendientes();
+        List<Pedido> pedidosPendientes=cadeteriaSeleccionada.PedidosPendientes();
+        foreach(Pedido Pendiente in pedidosPendientes){
+            Pendiente.Mostrar();
+        }
         Console.WriteLine("Seleccione el numero de pedido que desea utilizar");
         var a = Console.ReadLine();
         int numero;
@@ -201,6 +213,22 @@ internal class Program
         }
         return nuevaLista;
     }
+    public static void CrearPedido(int nroDePedido,Cadeteria cadeteriaSeleccionada)
+        {
+        Console.WriteLine("Ingrese el nombre del cliente");
+        string nombreCliente = Console.ReadLine();
+        Console.WriteLine("Ingrese la direccion donde vive");
+        string direccionCliente = Console.ReadLine();
+        Console.WriteLine("Ingrese el telefono del cliente");
+        string telefonoCliente = Console.ReadLine();
+        Console.WriteLine("Ingrese los datos de Referencia");
+        string datosReferencia = Console.ReadLine();
+        var datosCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferencia);
+        Console.WriteLine("Ingrese l nombre que tenga del pedido");
+        string observaciones = Console.ReadLine();
+        var PedidoTomado = new Pedido(nroDePedido, observaciones, datosCliente);
+        cadeteriaSeleccionada.ListadoPedidos.Add(PedidoTomado);
+        }
 
   
 }

@@ -15,13 +15,13 @@ namespace Programa
         private string nombre;
         private Cliente nombreCliente;
         private Estados estado;
-        private Cadete? cadeteResponsable;
+        private Cadete cadeteResponsable;
 
         public int Numero { get => numero; set => numero = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public Cliente NombreCliente { get => nombreCliente; set => nombreCliente = value; }
         public Estados Estado { get => estado; set => estado = value; }
-         public Cadete? CadeteResponsable { get => cadeteResponsable; set => cadeteResponsable = value; }
+         public Cadete CadeteResponsable { get => cadeteResponsable; set => cadeteResponsable = value; }
 
         public Pedido(int numero, string nombre, Cliente cliente)
         {
